@@ -28,9 +28,11 @@ Decimal_ = Annotated[Decimal, AfterValidator(convert_decimal_128)]
 
 
 class ProductUpdate(BaseSchemaMixin):
+    name: Optional[str] = Field(None, description="Product name")
     quantity: Optional[int] = Field(None, description="Product quantity")
     price: Optional[Decimal_] = Field(None, description="Product price")
     status: Optional[bool] = Field(None, description="Product status")
+    updated_at: Optional[datetime] = Field(default_factory=datetime.utcnow, description="Time of last update")
 
 
 class ProductUpdateOut(ProductOut):
